@@ -15,7 +15,7 @@ for unknown in unknowns:
     else:
         params.append((arg[0], arg[1]))
 
-url = '/'.join(['https://api.cirrascale.net', *args])
+url = '/'.join([os.environ.get('CCS_URL', 'https://api.cirrascale.net'), *args])
 params.append(('_format','text'))
 headers = {'Authorization': os.environ['CCS_KEY']}
 response = requests.post(url, params=params, headers=headers)

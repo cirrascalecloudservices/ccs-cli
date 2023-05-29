@@ -1,2 +1,2 @@
 import setuptools
-setuptools.setup(name='ccs-cli', scripts=['ccs'])
+setuptools.setup(name='ccs-cli', scripts=['ccs.py'])

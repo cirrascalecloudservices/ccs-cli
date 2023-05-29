@@ -1,13 +1,18 @@
 # ccs-cli
 cirrascale command line interface
-  
-<pre>
-sudo pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
-</pre>
 
 # mac
 
+<pre>
+pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+</pre>
+
 # linux
+
+<pre>
+sudo apt install python3-pip
+sudo pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+</pre>
 
 # windows
 

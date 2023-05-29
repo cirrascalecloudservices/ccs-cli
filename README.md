@@ -7,12 +7,16 @@ cirrascale command line interface
 pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
 
+and then add CCS_KEY to ~/.zshenv
+
 # Linux
 
 <pre>
 sudo apt install python3-pip
 sudo pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
+
+and then add CCS_KEY to /etc/environment
 
 # Windows
 
@@ -21,3 +25,5 @@ sudo pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-
 <pre>
 pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
+
+and then add CCS_KEY using "advanced system settings"

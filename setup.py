@@ -9,7 +9,7 @@ config = {
     'name': 'ccs-cli',
     'install_requires': ['requests'],
     'entry_points' : {
-        'console_scripts': ['ccs=cirrascale.cli:main'],
+        'console_scripts': ['ccs=ccs:main'],
     }
 }
 

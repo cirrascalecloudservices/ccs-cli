@@ -4,6 +4,7 @@ cirrascale command line interface
 # Mac
 
 <pre>
+brew install python
 pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
 

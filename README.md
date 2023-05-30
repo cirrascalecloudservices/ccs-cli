@@ -4,8 +4,8 @@ cirrascale command line interface
 # Mac
 
 <pre>
-brew install python
-pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+brew install python3
+pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
 
 and then add CCS_KEY to ~/.zshenv

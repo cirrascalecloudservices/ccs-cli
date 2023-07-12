@@ -14,7 +14,7 @@ and then add CCS_KEY to ~/.zshenv
 
 <pre>
 sudo apt install python3-pip
-sudo pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
 </pre>
 
 and then add CCS_KEY to /etc/environment

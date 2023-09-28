@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import argparse
 import os
 import requests
@@ -17,13 +18,10 @@ def main():
         else:
             params.append((arg[0], arg[1]))
 
-    ccs = os.path.basename(sys.argv[0])
-    api = '-'.join([*reversed(ccs.split('-')[1:]), 'api'])
-    key = '_'.join([*ccs.split('-'), 'key']).upper() # e.g., CCS_KEY
-    # url = '/'.join(['http://localhost:8080', *args])
-    url = '/'.join(['https://{}.cirrascale.net'.format(api), *args])
+    # url = '/'.join(['http://127.0.0.1:8080', *args])
+    url = '/'.join(['https://api.cirrascale.net', *args])
     params.append(('_format', 'text'))
-    headers = {'Authorization': os.environ[key]}
+    headers = {'Authorization': os.environ['CCS_KEY']}
     response = requests.post(url, params=params, headers=headers)
     print(response.text)
     sys.exit(0 if response.ok else 1)

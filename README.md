@@ -1,3 +1,5 @@
+Docs: https://github.com/cirrascalecloudservices/ccs-cli/wiki
+
 # Install
 
 ## Mac
@@ -30,7 +32,3 @@ pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reins
 </pre>
 
 and then add CCS_KEY using "advanced system settings" -> "environment variables"
-
-# Usage
-
-Docs: https://github.com/cirrascalecloudservices/ccs-cli/wiki

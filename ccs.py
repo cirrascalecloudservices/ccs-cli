@@ -11,15 +11,18 @@ def main():
     for arg in sys.argv[1:]:
         arr = arg.split('=', 1)
         if len(arr) == 1:
-            if len(path)>0:
-                params.append(('q', arr[0]))
-            else:
+            if len(path)==0:
                 path.extend([a for a in arr[0].split('/') if a])
+            else:
+                params.append(('q', arr[0]))
         else:
             params.append((arr[0], arr[1]))
 
+    if len(path)<2:
+        if path!=['get']:
+            path.append('get')
     method = 'get'
-    if len(path)>1:
+    if path[-1]!='get':
         method='post'
     # url = '/'.join(['http://127.0.0.1:8080', *path])
     url = '/'.join(['https://api.cirrascale.net', *path])

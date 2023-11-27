@@ -11,7 +11,7 @@ def main():
     for arg in sys.argv[1:]:
         arr = arg.split('=', 1)
         if len(arr) == 1:
-            if len(path)==0:
+            if len(path)==0: # first unnamed is noun/verb
                 path.extend([a for a in arr[0].split('/') if a])
             else:
                 params.append(('q', arr[0]))
@@ -26,7 +26,10 @@ def main():
         method='post'
     # url = '/'.join(['http://127.0.0.1:8080', *path])
     url = '/'.join(['https://api.cirrascale.net', *path])
-    headers = {'Authorization': os.environ['CCS_KEY']}
+    ccs_key = os.environ.get('CCS_KEY')
+    if not ccs_key:
+        ccs_key = open('/etc/ccs-key').read().splitlines()[0].split()[0]
+    headers = {'Authorization': ccs_key}
     request = requests.Request(method, url, params=params, headers=headers).prepare()
     print(request.method, request.url, file=sys.stderr)
     params.append(('_human', '1'))

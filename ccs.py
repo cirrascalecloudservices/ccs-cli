@@ -6,7 +6,7 @@ import sys
 
 def main():
     path = []  # http path
-    params = []  # http query params
+    params = []  # http request params
 
     for arg in sys.argv[1:]:
         arr = arg.split('=', 1)
@@ -21,8 +21,8 @@ def main():
     if len(path)<2:
         if path!=['get']:
             path.append('get')
-    method = 'get'
-    if path[-1]!='get':
+    method = path[-1]
+    if method!='get':
         method='post'
     # url = '/'.join(['http://127.0.0.1:8080', *path])
     url = '/'.join(['https://api.cirrascale.net', *path])
@@ -30,10 +30,10 @@ def main():
     if not ccs_key:
         ccs_key = open('/etc/ccs-key').read().splitlines()[0].split()[0]
     headers = {'Authorization': ccs_key}
-    request = requests.Request(method, url, params=params, headers=headers).prepare()
-    print(request.method, request.url, file=sys.stderr)
+    request = requests.Request(method, url, params=params if method=='get' else None, data=params if method=='post' else None, headers=headers).prepare()
+    print(request.method, request.url, request.body, file=sys.stderr)
     params.append(('_human', '1'))
-    request = requests.Request(method, url, params=params, headers=headers).prepare()
+    request = requests.Request(method, url, params=params if method=='get' else None, data=params if method=='post' else None, headers=headers).prepare()
     response = requests.Session().send(request)
     print(response.text.strip())
     sys.exit(0 if response.ok else 1)

@@ -24,8 +24,8 @@ and then add CCS_KEY to /etc/environment
 
 1. Install git from https://git-scm.com/download/win
 2. Install python
-   1. if installing python from https://www.python.org/downloads then be sure to check "Add python to path"
-   1. if installing python from windows app store then be sure to add pip path to windows path using "advanced system settings" -> "environment variables"
+   1. [recommended] if installing python from https://www.python.org/downloads then be sure to check "Add python to path"
+   1. [less recommended] if installing python from windows app store then be sure to add pip path to windows path using "advanced system settings" -> "environment variables"
 
 <pre>
 pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall

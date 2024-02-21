@@ -1,22 +1,43 @@
 #!/usr/bin/env python3
 
 import os
-import requests
 import sys
+import json
+
+import requests
+import tabulate
+
+tabulate.MIN_PADDING=0
+
+tablefmt = tabulate.TableFormat(
+    lineabove=tabulate.Line("-", "-", "--", "-"),
+    linebelowheader=tabulate.Line("-", "-", "--", "-"),
+    linebetweenrows=None,
+    linebelow=tabulate.Line("-", "-", "--", "-"),
+    headerrow=tabulate.DataRow(" ", "  ", " "),
+    datarow=tabulate.DataRow(" ", "  ", " "),
+    padding=0,
+    with_header_hide=None,
+)
 
 def main():
     path = []  # http path
     params = []  # http request params
+    _format = 0
 
     for arg in sys.argv[1:]:
         arr = arg.split('=', 1)
-        if len(arr) == 1:
+        # named
+        if len(arr) > 1:
+            params.append((arr[0], arr[1]))
+            if arr[0]=='_format':
+                _format=int(arr[1])
+        # unnamed
+        else:
             if len(path)==0: # first unnamed is noun/verb
-                path.extend([a for a in arr[0].split('/') if a])
+                path.extend(arr[0].split('/'))
             else:
                 params.append(('q', arr[0]))
-        else:
-            params.append((arr[0], arr[1]))
 
     if len(path)<2:
         if path!=['get']:
@@ -29,13 +50,19 @@ def main():
     ccs_key = os.environ.get('CCS_KEY')
     if not ccs_key:
         ccs_key = open('/etc/ccs-key').read().splitlines()[0].split()[0]
-    headers = {'Authorization': ccs_key}
-    request = requests.Request(method, url, params=params if method=='get' else None, data=params if method=='post' else None, headers=headers).prepare()
-    print(request.method, request.url, request.body, file=sys.stderr)
-    params.append(('_human', '1'))
-    request = requests.Request(method, url, params=params if method=='get' else None, data=params if method=='post' else None, headers=headers).prepare()
-    response = requests.Session().send(request)
-    print(response.text.strip())
+    request = requests.Request(method, url, params=params if method=='get' else None, data=params if method=='post' else None, headers={'Authorization': ccs_key}).prepare()
+    print(request.method, request.url, str(request.body or ''), file=sys.stderr)
+    response = requests.Session().send(request, stream=True)
+
+    if _format:
+        rows=[]
+        for line in response.iter_lines():
+            rows.append(json.loads(line))
+        print(tabulate.tabulate(rows, headers='keys', tablefmt=tablefmt))
+    else:
+        for line in response.iter_lines():
+            print(line.decode())
+
     sys.exit(0 if response.ok else 1)
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ config = {
     'py_modules': ['ccs'],
     'install_requires': ['requests', 'tabulate'],
     'entry_points': {
-        'console_scripts': ['ccs=ccs:main'],
+        'console_scripts': ['ccs=ccs:ccs', 'ccsfmt=ccs:ccsfmt'],
     }
 }
 

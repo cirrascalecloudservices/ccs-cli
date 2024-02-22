@@ -20,7 +20,7 @@ tablefmt = tabulate.TableFormat(
     with_header_hide=None,
 )
 
-def main():
+def ccs():
     path = []  # http path
     params = []  # http request params
     _format = 0
@@ -65,5 +65,13 @@ def main():
 
     sys.exit(0 if response.ok else 1)
 
+
+def ccsfmt():
+    rows = []
+    for line in sys.stdin:
+        rows.append(json.loads(line))
+    print(tabulate.tabulate(rows, headers="keys", tablefmt=tablefmt))
+
+
 if __name__ == "__main__":
-    main()
+    ccs()

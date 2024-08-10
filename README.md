@@ -22,6 +22,8 @@ sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force
 
 and then add CCS_KEY to /etc/environment
 
+TODO: or use pipx?
+
 ## Windows
 
 1. Install git from https://git-scm.com/download/win

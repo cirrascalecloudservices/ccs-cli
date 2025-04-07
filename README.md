@@ -61,3 +61,8 @@ sudo pip3 uninstall ccs-cli
 <pre>
 sudo pip3 uninstall ccs-cli --break-system-packages
 </pre>
+
+unknown, e.g., cloud-init:
+<pre>
+sudo pip3 uninstall ccs-cli --break-system-packages || sudo pip3 uninstall ccs-cli
+</pre>

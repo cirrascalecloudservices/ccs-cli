@@ -49,3 +49,15 @@ pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reins
 </pre>
 
 and then add CCS_KEY using "advanced system settings" -> "environment variables"
+
+# Uninstall
+
+20.04 focal and 22.04 jammy:
+<pre>
+sudo pip3 uninstall ccs-cli
+</pre>
+
+24.04 noble and later:
+<pre>
+sudo pip3 uninstall ccs-cli --break-system-packages
+</pre>

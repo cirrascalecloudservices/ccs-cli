@@ -18,7 +18,7 @@ and then add CCS_KEY to ~/.zshenv
 20.04 focal and 22.04 jammy:
 <pre>
 sudo apt-get install python3-pip -y
-sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli
 </pre>
 
 24.04 noble and later:
@@ -30,7 +30,7 @@ sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --break
 unknown, e.g., cloud-init:
 <pre>
 sudo apt-get install python3-pip -y
-sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --break-system-packages || sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --break-system-packages || sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli
 </pre>
 
 and then add CCS_KEY to /etc/environment

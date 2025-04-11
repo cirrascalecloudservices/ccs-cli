@@ -45,15 +45,17 @@ def ccs():
       request = requests.Request(method, next, headers={'Authorization': ccs_key}).prepare()
       print(request.method, request.url, file=sys.stderr) # debug
       response = requests.Session().send(request)
+      next = response.json().get('next')
       if response.ok:
-        next = response.json().get('next')
-        for line in response.json()['value']:
+        for line in response.json().get('value', []):
           print(json.dumps(line), flush=True)
         time.sleep(int(response.headers.get('retry-after', '0'))) # honor retry-after seconds
       else:
         print(json.dumps(response.json()))
       method = 'get'
-      response.raise_for_status()
+      # response.raise_for_status()
+      if not response.ok:
+        sys.exit(1)
   else: # old style
     if not action:
       action='get'

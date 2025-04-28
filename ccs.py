@@ -38,7 +38,7 @@ def ccs():
   url = os.environ.get('CCS_URL') or 'https://api.cirrascale.net'
   ccs_key = os.environ.get('CCS_KEY') or open('/etc/ccs-key').read().splitlines()[0].split()[0]
 
-  if ':' in action: # new style, e.g., always json, paging, work-queue, etc..
+  if ':' in action: # new style, e.g., always json, paging, async-work-queue, etc..
     method = 'get' if action.split(':')[1] == 'get' else 'post'
     next = requests.Request(method, f'{url}/{action}', params=params).prepare().url
     while next:

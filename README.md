@@ -27,7 +27,7 @@ sudo apt-get install python3-pip -y
 sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --break-system-packages
 </pre>
 
-unknown, e.g., cloud-init:
+if u don't know the ubuntu release, e.g., in a generic cloud-init script, then do this:
 <pre>
 sudo apt-get install python3-pip -y
 sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --break-system-packages || sudo pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli

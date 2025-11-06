@@ -45,7 +45,6 @@ def ccs():
       request = requests.Request(method, next, headers={'Authorization': ccs_key}).prepare()
       print(request.method, request.url, file=sys.stderr) # debug
       response = requests.Session().send(request)
-      next = response.json().get('next')
       if response.ok:
         for line in response.json().get('value', []):
           print(json.dumps(line), flush=True)
@@ -53,6 +52,7 @@ def ccs():
       else:
         print(json.dumps(response.json()))
       method = 'get'
+      next = response.json().get('next')
       # response.raise_for_status()
       if not response.ok:
         sys.exit(1)

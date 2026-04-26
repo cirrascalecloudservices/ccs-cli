@@ -46,7 +46,7 @@ def ccs():
       print(request.method, request.url, file=sys.stderr) # debug
       response = requests.Session().send(request)
       if response.ok:
-        for line in response.json().get('value', []):
+        for line in response.json().get('results', []):
           print(json.dumps(line), flush=True)
         time.sleep(int(response.headers.get('retry-after', '0'))) # honor retry-after seconds
       else:

@@ -4,6 +4,41 @@ Docs: https://github.com/cirrascalecloudservices/ccs-cli/wiki
 
 # Install
 
+## uv (any platform)
+
+If u have [uv](https://docs.astral.sh/uv/), this works the same on mac, linux and windows, and
+avoids the `--break-system-packages` stuff needed on newer ubuntu:
+
+<pre>
+uv tool install git+https://github.com/cirrascalecloudservices/ccs-cli --force
+</pre>
+
+and then add CCS_KEY to the environment as described in the per-platform sections below.
+
+To upgrade or uninstall later:
+<pre>
+uv tool upgrade ccs-cli
+uv tool uninstall ccs-cli
+</pre>
+
+If u don't have uv yet:
+<pre>
+curl -LsSf https://astral.sh/uv/install.sh | sh          # mac/linux
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # windows
+</pre>
+
+## No install at all (uv)
+
+ccs.py declares its own dependencies inline, so uv can run it without installing anything.
+Useful in cloud-init and other throwaway environments:
+
+<pre>
+curl -LsSf https://raw.githubusercontent.com/cirrascalecloudservices/ccs-cli/main/ccs.py -o ccs.py
+uv run ./ccs.py compute/get
+</pre>
+
+uv fetches requests and tabulate into a cache on first run.
+
 ## Mac
 
 <pre>
@@ -53,6 +88,11 @@ pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reins
 and then add CCS_KEY using "advanced system settings" -> "environment variables"
 
 # Uninstall
+
+if installed with uv:
+<pre>
+uv tool uninstall ccs-cli
+</pre>
 
 20.04 focal and 22.04 jammy:
 <pre>

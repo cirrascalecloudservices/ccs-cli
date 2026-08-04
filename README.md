@@ -93,7 +93,7 @@ and make sure `~/.ssh/config` includes that dir:
 Include config.d/*
 </pre>
 
-hosts with no name or address are skipped and reported on stderr, so they don't end up in the file
+hosts with no usable address are skipped and reported on stderr, so they don't end up in the file. this includes hosts whose ip is `-`, e.g., switches, nas, and not-yet-turned-over machines
 
 # Uninstall
 

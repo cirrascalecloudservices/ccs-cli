@@ -79,6 +79,8 @@ def ccsfmt():
       name = row.get('name') or ''
       addresses = row.get('addresses') or ([row['primary_ip']] if row.get('primary_ip') else [])
       hostname = addresses[0].split('/')[0] if addresses else '' # strip prefix len, e.g., 1.2.3.4/24
+      if hostname == '-': # no ip, e.g., a switch/nas/planned machine
+        hostname = ''
       if not name or not hostname:
         print(f'skipping {json.dumps(row)}', file=sys.stderr) # debug
         continue

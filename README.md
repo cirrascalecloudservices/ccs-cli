@@ -52,6 +52,49 @@ pip install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reins
 
 and then add CCS_KEY using "advanced system settings" -> "environment variables"
 
+# Format
+
+`ccs` emits one json object per line. pipe it through `ccsfmt` to get a table:
+
+<pre>
+ccs compute/get | ccsfmt
+--------------------------------------------------------------
+ name     site   type             status  addresses
+--------------------------------------------------------------
+ GPUAB12  san01  4u-8xgpu-4028gr  active  ['123.45.67.89/24']
+ GPUC3D4  san01  4u-8xgpu-4028gr  active  ['123.45.67.90/24']
+--------------------------------------------------------------
+</pre>
+
+## SSH config
+
+`ccsfmt --ssh` formats hosts as ssh config stanzas instead of a table:
+
+<pre>
+ccs compute/get | ccsfmt --ssh
+Host GPUAB12 gpuab12
+  HostName 123.45.67.89
+
+Host GPUC3D4 gpuc3d4
+  HostName 123.45.67.90
+</pre>
+
+each host gets a lowercase alias, so `ssh GPUAB12` and `ssh gpuab12` both work.
+
+write it to its own file under `~/.ssh/config.d`:
+
+<pre>
+ccs compute/get | ccsfmt --ssh > ~/.ssh/config.d/ccs
+</pre>
+
+and make sure `~/.ssh/config` includes that dir:
+
+<pre>
+Include config.d/*
+</pre>
+
+hosts with no name or address are skipped and reported on stderr, so they don't end up in the file
+
 # Uninstall
 
 20.04 focal and 22.04 jammy:

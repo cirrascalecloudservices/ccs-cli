@@ -8,7 +8,7 @@ Docs: https://github.com/cirrascalecloudservices/ccs-cli/wiki
 
 <pre>
 brew install python3
-pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall
+pip3 install git+https://github.com/cirrascalecloudservices/ccs-cli --force-reinstall --break-system-packages
 </pre>
 
 and then add CCS_KEY to ~/.zshenv

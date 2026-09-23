@@ -1,0 +1,16 @@
+[project]
+name = "ccs-cli"
+version = "0.1.0"
+requires-python = ">=3.8"
+dependencies = ["requests", "tabulate"]
+
+[project.scripts]
+ccs = "ccs:ccs"
+ccsfmt = "ccs:ccsfmt"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["ccs"]

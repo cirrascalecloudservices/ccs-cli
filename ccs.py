@@ -73,7 +73,25 @@ def ccsfmt():
   rows = []
   for line in sys.stdin:
     rows.append(json.loads(line))
-  print(tabulate.tabulate(rows, headers='keys', tablefmt=tablefmt))
+  if '--ssh' in sys.argv[1:]: # ssh config stanzas, e.g., for ~/.ssh/config.d
+    first = True
+    for row in rows:
+      name = row.get('name') or ''
+      addresses = row.get('addresses') or ([row['primary_ip']] if row.get('primary_ip') else [])
+      hostname = addresses[0].split('/')[0] if addresses else '' # strip prefix len, e.g., 1.2.3.4/24
+      if hostname == '-': # no ip, e.g., a switch/nas/planned machine
+        hostname = ''
+      if not name or not hostname:
+        print(f'skipping {json.dumps(row)}', file=sys.stderr) # debug
+        continue
+      hosts = [name] + ([name.lower()] if name.lower() != name else []) # e.g., GPUAB12 gpuab12
+      if not first:
+        print()
+      first = False
+      print(f'Host {" ".join(hosts)}')
+      print(f'  HostName {hostname}')
+  else:
+    print(tabulate.tabulate(rows, headers='keys', tablefmt=tablefmt))
 
 if __name__ == "__main__":
   ccs()
